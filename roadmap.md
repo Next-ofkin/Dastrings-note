@@ -1,95 +1,161 @@
-# 🗺️ Dastrings Note – Development Roadmap
-
-**Start Date:** 2025-04-23  
-**Project Type:** Progressive Web App (PWA)  
-**Stack:** [Next.js](https://nextjs.org), [Prisma](https://www.prisma.io/), [MongoDB](https://www.mongodb.com/), [NextAuth](https://next-auth.js.org/), [Tailwind CSS](https://tailwindcss.com/), [ShadCN UI](https://ui.shadcn.com/docs/installation), [UploadThing](https://uploadthing.com/), [Cloudinary](https://cloudinary.com/), [OneSignal](https://onesignal.com/)
+## 🧠 DASSTRINGS NOTE – DEVELOPMENT ROADMAP
 
 ---
 
-## ✅ Stage 0 – Project Setup
-- [ ] Create a new [Next.js](https://nextjs.org/docs) 14 project (App Router)
-- [ ] Configure [Tailwind CSS](https://tailwindcss.com/docs/installation) and [ShadCN UI](https://ui.shadcn.com/docs/installation)
-- [ ] Initialize [Prisma](https://www.prisma.io/docs/getting-started) with [MongoDB](https://www.mongodb.com/cloud/atlas)
-- [ ] Setup [NextAuth v5](https://next-auth.js.org/getting-started/introduction) with email/password login
-- [ ] Connect [UploadThing](https://docs.uploadthing.com/) for file uploads
-- [ ] Setup [Cloudinary](https://cloudinary.com/documentation) for image hosting
-- [ ] Connect [OneSignal](https://documentation.onesignal.com/docs/web-push-setup) for push notifications
+### 📘 **Project Overview**
+
+**Dasstrings Note** is a multi-tenant Progressive Web App (PWA) for managing lesson notes within educational institutions. It enables **teachers** to create structured lesson plans, **school admins** to review and approve them, and **super admins** to oversee all system activity across schools. The platform supports file uploads, real-time feedback, role-based access, and email notifications — all built with a modern full-stack JavaScript architecture.
 
 ---
 
-## 🔐 Stage 1 – Authentication & Roles
-- [ ] Create `users` model using Prisma with `role` and `schoolId`
-- [ ] Protect routes with middleware using [NextAuth](https://next-auth.js.org/configuration/nextjs)
-- [ ] Create public signup page for **School Admins**
-- [ ] Build secure login + invite flow for **Teachers**
-- [ ] Seed initial **Super Admin** (manually or via script)
+### ✅ **Core Features**
+
+#### 👤 User Roles
+- **Super Admin**: Manages all schools, users, and system settings.
+- **School Admin**: Manages school data, invites teachers, reviews notes.
+- **Teacher**: Creates and submits weekly lesson notes, responds to feedback.
+
+#### 📚 Lesson Note Workflow
+- Teachers draft and submit structured notes weekly.
+- Admins approve or reject notes with comments.
+- Teachers revise and resubmit.
+- Notes are archived after approval.
+
+#### 📤 Uploads & Media
+- PDF/Word file uploads (lesson notes)
+- Image upload for user avatars (via Cloudinary)
+
+#### 🔔 Notifications
+- Email alerts for approvals, rejections, feedback, and reminders.
+
+#### 🧾 Reporting
+- Submission logs and downloadable report history for Admins.
+
+#### ⚙️ System Capabilities
+- Responsive UI across all screen sizes
+- Offline-ready PWA support
+- Role-based access control
+- Email onboarding and invitation flow
 
 ---
 
-## 🏫 Stage 2 – School & User Management
-- [ ] Create `schools` model in Prisma and relate to `users`
-- [ ] Allow School Admin to invite teachers by email
-- [ ] Teachers complete their profiles on first login
-- [ ] Super Admin dashboard: View/edit schools and user roles
+### 💻 **Technology Stack**
+
+| Layer             | Tool / Service                                                                 |
+|------------------|----------------------------------------------------------------------------------|
+| **Frontend**     | [Next.js 14](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), [ShadCN UI](https://ui.shadcn.com/docs/installation) |
+| **Auth**         | [Auth0](https://auth0.com/docs) – Secure, scalable auth with roles and JWT |
+| **Database**     | [MongoDB Atlas](https://www.mongodb.com/docs/atlas) – NoSQL document database |
+| **ORM**          | [Prisma](https://www.prisma.io/docs) – MongoDB adapter with schema modeling |
+| **File Uploads** | [UploadThing](https://uploadthing.com) – Handle PDFs, Word files, images |
+| **Image Hosting**| [Cloudinary](https://cloudinary.com/documentation) – Fast optimized avatar serving |
+| **Emails**       | [Nodemailer](https://nodemailer.com/about/) – SMTP email via Gmail or Outlook |
+| **Hosting**      | [Vercel](https://vercel.com) – Seamless frontend + backend deployment |
 
 ---
 
-## 📘 Stage 3 – Lesson Notes & Feedback
-- [ ] Create `lesson_notes` model with fields: class, subject, week, objectives, file link
-- [ ] Use [UploadThing](https://docs.uploadthing.com/) to upload note PDFs and images
-- [ ] Admins can **approve** or **reject** notes
-- [ ] Build `feedback_threads` model for 2-way commenting (chat-style)
-- [ ] Teachers can revise and resubmit until approved
+### 🧱 **Development Phases & Milestones**
 
 ---
 
-## 👤 Stage 4 – Profiles & Media
-- [ ] Users can edit their name, password, and photo
-- [ ] Upload and serve profile images with [Cloudinary](https://cloudinary.com/documentation/image_upload_api_reference)
-- [ ] Pull initial avatar from email service if available
+## 🚀 Phase 0 – Project Initialization
+
+✅ Tasks:
+- [ ] Create Next.js App (`npx create-next-app@latest`)
+- [ ] Setup Tailwind CSS
+- [ ] Install ShadCN UI
+- [ ] Setup TypeScript, ESLint, Prettier
+- [ ] Initialize Git repo + GitHub
 
 ---
 
-## 📊 Stage 5 – Dashboards & Logs
-- [ ] School Admin dashboard with stats (approved, pending, rejected)
-- [ ] Teachers dashboard with submission history and filters
-- [ ] Export logs as CSV (optional)
+## 🔐 Phase 1 – Authentication System
+
+✅ Tasks:
+- [ ] Configure Auth0 in Next.js project
+- [ ] Protect routes using middleware
+- [ ] Create login, signup, logout flow
+- [ ] Auto-assign roles: SUPER_ADMIN, ADMIN, TEACHER
+- [ ] Store Auth0 user profile in Prisma/MongoDB on first login
+- [ ] Manual Super Admin seeding
 
 ---
 
-## 🔔 Stage 6 – Notifications
-- [ ] Integrate [OneSignal](https://documentation.onesignal.com/docs/web-push-setup) for push notifications
-- [ ] Notify Teachers on submission status (approved/rejected)
-- [ ] Notify Admins on new lesson note submissions
-- [ ] (Optional) Add email-based reminders using [Nodemailer](https://nodemailer.com/about/)
+## 🏫 Phase 2 – School & User Management
+
+✅ Tasks:
+- [ ] Create `schools` model
+- [ ] Link `users` to `schoolId`
+- [ ] Build School Admin dashboard
+- [ ] Allow Admins to invite Teachers by email
+- [ ] Build Teacher onboarding: first-login profile setup
 
 ---
 
-## 🚀 Stage 7 – PWA & Final Polish
-- [ ] Add PWA support using [`next-pwa`](https://www.npmjs.com/package/next-pwa)
-- [ ] Setup web manifest, app icons, splash screen
-- [ ] Enable offline support for drafts via localStorage or IndexedDB
-- [ ] Mobile/responsive polish using [Tailwind](https://tailwindcss.com/docs/responsive-design)
-- [ ] Add accessibility improvements (ARIA, keyboard nav)
+## 📘 Phase 3 – Lesson Notes & Review System
+
+✅ Tasks:
+- [ ] Create `lesson_notes` model with fields (class, subject, week, objectives, fileUrl)
+- [ ] Upload notes via [UploadThing](https://docs.uploadthing.com/)
+- [ ] Admin can approve/reject with comments
+- [ ] Feedback thread model per note
+- [ ] Teachers can edit and resubmit rejected notes
 
 ---
 
-## 📚 Reference Links
+## 👤 Phase 4 – Profile Management & Avatar Upload
 
-| Tool | Docs |
-|------|------|
-| Next.js | [https://nextjs.org/docs] |
-| Prisma | [https://www.prisma.io/docs] |
-| MongoDB Atlas | [https://www.mongodb.com/docs/atlas/] |
-| NextAuth | [https://next-auth.js.org] |
-| Tailwind CSS | [https://tailwindcss.com/docs] |
-| ShadCN UI | [https://ui.shadcn.com/docs/installation] |
-| UploadThing | [https://docs.uploadthing.com/] |
-| Cloudinary | [https://cloudinary.com/documentation] |
-| OneSignal | [https://documentation.onesignal.com] |
+✅ Tasks:
+- [ ] Create user profile page
+- [ ] Upload avatar with [Cloudinary](https://cloudinary.com/documentation/image_upload_api_reference)
+- [ ] Default image fallback
 
 ---
 
-> ✨ Track progress in GitHub Projects, Notion, or Trello — and check off each stage as you build.  
-> This roadmap is your master checklist to launch Dastrings Note successfully.
+## 📊 Phase 5 – Reporting & Admin Dashboard
 
+✅ Tasks:
+- [ ] Teacher dashboard: see all submissions + filters
+- [ ] Admin dashboard: see all notes by status/date/class
+- [ ] Export history to CSV (optional)
+
+---
+
+## ✉️ Phase 6 – Email Notifications
+
+✅ Tasks:
+- [ ] Integrate [Nodemailer](https://nodemailer.com/about/) with Gmail SMTP
+- [ ] Notify Teachers:
+  - Feedback received
+  - Approval/Rejection
+- [ ] Notify Admins on new submissions
+- [ ] Optional: Scheduled weekly reminders
+
+---
+
+## 🌐 Phase 7 – PWA Features & Final Polish
+
+✅ Tasks:
+- [ ] Add [`next-pwa`](https://www.npmjs.com/package/next-pwa) plugin
+- [ ] Create manifest, install prompt, favicon
+- [ ] Offline caching for lesson drafts
+- [ ] Mobile-first UI polish
+- [ ] Accessibility: keyboard navigation, screen reader support
+
+---
+
+### 📚 Reference Docs
+
+| Tool          | Docs |
+|---------------|------|
+| Next.js       | [https://nextjs.org/docs](https://nextjs.org/docs) |
+| Prisma        | [https://www.prisma.io/docs](https://www.prisma.io/docs) |
+| MongoDB       | [https://www.mongodb.com/docs/atlas](https://www.mongodb.com/docs/atlas) |
+| Auth0         | [https://auth0.com/docs](https://auth0.com/docs) |
+| Tailwind CSS  | [https://tailwindcss.com/docs](https://tailwindcss.com/docs) |
+| ShadCN UI     | [https://ui.shadcn.com/docs/installation](https://ui.shadcn.com/docs/installation) |
+| UploadThing   | [https://docs.uploadthing.com/](https://docs.uploadthing.com/) |
+| Cloudinary    | [https://cloudinary.com/documentation](https://cloudinary.com/documentation) |
+| Nodemailer    | [https://nodemailer.com/about/](https://nodemailer.com/about/) |
+
+---
